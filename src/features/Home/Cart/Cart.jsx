@@ -1,11 +1,12 @@
 import { Drawer } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeListCart } from "../../../app/Slice/CartSlide";
+import { removeListCart, updateQuantity } from "../../../app/Slice/CartSlide";
 import { messageShowErr, messageShowSuccess } from "../../../function";
 import "../../../sass/Home/Cart.scss";
 import { cart } from "../../Admin/svg/IconSvg";
 import Payment from "../Payment/Payment";
+import { currencyFormatter } from "../../Utils/fotmat";
 
 export default function Cart() {
     const [toggleDrawer, setToggleDrawer] = useState(false);
@@ -28,6 +29,10 @@ export default function Cart() {
                 setStatusDialog(true);
             }
         }
+    };
+    const handleUpdateQuantity = (id, quantity) => {
+        // Sử dụng action updateQuantity để cập nhật số lượng sản phẩm trong giỏ hàng
+        dispatch(updateQuantity({ id, quantity }));
     };
 
     const handleCloseDialog = () => {
@@ -68,6 +73,7 @@ export default function Cart() {
                             <div className="st">Số tiền</div>
                             <div className="tt">Thao tác</div>
                         </div>
+                      
                         {listCart?.map((ok, index) => (
                             <div className="content-product" key={index}>
                                 <div className="sp">
@@ -76,10 +82,26 @@ export default function Cart() {
                                     </div>
                                     <div className="text">{ok.name}</div>
                                 </div>
-                                <div className="dg">₫{Number(ok.price).toLocaleString()}</div>
-                                <div className="sl">{ok.quantityCurrent}</div>
+                                <div className="dg">{currencyFormatter.format(ok.price)}</div>
+                                <div className="sl">
+                                    <button
+                                        className="minus"
+                                        onClick={() => handleUpdateQuantity(ok.id, ok.quantityCurrent - 1)}
+                                        disabled={ok.quantityCurrent <= 1}
+                                    >
+                                        -
+                                    </button>
+                                    <p className="input-cart">{ok.quantityCurrent}</p>
+                                    <button
+                                        className='plus'
+                                        onClick={() => handleUpdateQuantity(ok.id, ok.quantityCurrent + 1)}
+                                        disabled={ok.quantityCurrent >= ok.quantity} // Thay 10 bằng số lượng tối đa cho phép
+                                    >
+                                        +
+                                    </button>
+                                </div>
                                 <div className="st">
-                                    ₫{Number(ok.priceResult).toLocaleString()}
+                                    {currencyFormatter.format(ok.quantityCurrent * ok.price)}
                                 </div>
                                 <div
                                     className="tt"

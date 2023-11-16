@@ -9,6 +9,8 @@ import {
     userHome,
 } from "../../Admin/svg/IconSvg";
 import Cart from "../Cart/Cart";
+import logono from '../../../images/lognobg.png'
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Menu({ user, setUserMenu }) {
     console.log("user", user);
@@ -17,6 +19,7 @@ export default function Menu({ user, setUserMenu }) {
     const MenuEl = useRef(null);
     const MenuHidentEl = useRef(null);
     const MenuBarEl = useRef(null);
+    const history = useHistory();
 
     const ClickAvatar = () => {
         setinitSelect("flex");
@@ -74,16 +77,19 @@ export default function Menu({ user, setUserMenu }) {
 
     const handleLogout = () => {
         setUserMenu();
+        history.push("/login");
     };
-
+ 
     const avatarDefault =
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWalCQZajCWwnxKEE86RcbGh2i1XxEQ9Jkxt6ijNjm1CrvdnYilpInfHHVeriUng58IBo&usqp=CAU";
+        const avatarAfter =
+        "https://cdn.pixabay.com/photo/2016/11/22/23/18/kingfisher-1851127_960_720.jpg";
 
     return (
         <div className="Menu" ref={MenuEl}>
             <div className="menu-logo">
                 <div className="logo">
-                    <Link to="/">my pet</Link>
+                    <Link to="/">Pets Shop</Link>
                 </div>
             </div>
             <div className="menu-bar" ref={MenuBarEl}>
@@ -100,7 +106,7 @@ export default function Menu({ user, setUserMenu }) {
                                 <Link to="/Shop">Cửa hàng</Link>
                             </li>
                             <li className="item">
-                                <Link to="">Giới thiệu</Link>
+                                <Link to="/Services">Dịch vụ</Link>
                             </li>
                             <li className="item">
                                 <Link to="/ListNews">Tin tức</Link>
@@ -119,7 +125,7 @@ export default function Menu({ user, setUserMenu }) {
                         <div className="icon">{search}</div>
                     </div>
                     <div className="avatar" onClick={ClickAvatar}>
-                        <img loading="lazy" src={user.length === 0 ? avatarDefault : user.avatar} alt="" />
+                        <img loading="lazy" src={user.length === 0 ? avatarDefault : user.avatar === null ? avatarAfter : user.avatar} alt="" />
                     </div>
                     <Cart />
                     {openSelect === "" && (

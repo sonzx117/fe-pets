@@ -15,6 +15,7 @@ import { addListCart } from "../../../app/Slice/CartSlide";
 import { search } from "../../Admin/svg/IconSvg";
 import Banner from "../../Banner/Banner";
 import Breadcrumbs from "../../Breadcrumbs/Breadcrumbs";
+import { currencyFormatter } from "../../Utils/fotmat";
 
 export default function ShopPet() {
     const listBread = [{ name: "Trang chủ", link: "/" }, { name: "Cửa hàng" }];
@@ -30,9 +31,13 @@ export default function ShopPet() {
     const typingTimeout = useRef(null);
     const listCart = useSelector((state) => state.cart.listCart);
     useEffect(() => {
+       
         petApi.getShop({ page, type, category, petOrProduct, name }).then((ok) => {
             setData(ok.data);
-        });
+        })
+        .catch((error) => {
+                console.error("Error fetching data:", error);
+            })
     }, [page, type, category, petOrProduct, name]);
 
     useEffect(() => {
@@ -54,15 +59,33 @@ export default function ShopPet() {
             setName(value);
         }, 300);
     };
+    const [loading, setLoading] = useState(false);
 
-    const onChangeTypePet = (e) => {
-        setPetOrProduct("pet");
-        setType(e);
+    const fetchData = async () => {
+        setLoading(true);
+        try {
+            const response = await petApi.getShop({ page, type, category, petOrProduct, name });
+            setData(response.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const onChangeCategory = (e) => {
+    useEffect(() => {
+        fetchData();
+    }, [page, type, category, petOrProduct, name]);
+
+    const onChangeTypePet = async (e) => {
+        setPetOrProduct("pet");
+        setType(e); 
+        await fetchData();
+    };
+    const onChangeCategory = async (e) => {
         setPetOrProduct("product");
         setCategory(e);
+        await fetchData();
     };
 
     const dispatch = useDispatch();
@@ -135,10 +158,12 @@ export default function ShopPet() {
                                         </div>
                                     ))}
                                 </div>
+                                {loading && <div>Loading...</div>}
                             </div>
                         </div>
                     </Grid>
-                    <Grid item lg={9} md={9} sm={9} xs={12}>
+                    
+                    {loading ?  <div>Loanding ....</div> : <Grid item lg={9} md={9} sm={9} xs={12}>
                         <Grid container spacing={2}>
                             {data?.rows?.map((ok, index) => (
                                 <Grid item lg={3} md={4} sm={6} key={index}>
@@ -160,15 +185,14 @@ export default function ShopPet() {
                                         </div>
                                         <div className="price">
                                             <div className="price2">
-                                                {parseInt(ok.price).toLocaleString()}
+                                                {currencyFormatter.format(ok.price)}
                                             </div>
-                                            <div className="gia">VNĐ</div>
                                         </div>
                                     </div>
                                 </Grid>
                             ))}
                         </Grid>
-                    </Grid>
+                    </Grid> }
                 </Grid>
                 <Pagination
                     onChange={(e, i) => {

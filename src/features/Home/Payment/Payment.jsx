@@ -31,7 +31,7 @@ export default function Payment({
   const handleGetResult = () => {
     let result = 0;
     listCart.forEach((el) => {
-      result += el.priceResult;
+      result += (el.quantityCurrent) * (el.price);
     });
     return Number(result).toLocaleString();
   };
@@ -109,7 +109,7 @@ export default function Payment({
                   <div className="box_content">
                     <div className="item">Số lượng: {ok.quantityCurrent}</div>
                     <div className="item">
-                      Giá: {Number(ok.priceResult).toLocaleString()} vnđ
+                      Giá: {Number(ok.price).toLocaleString()} vnđ
                     </div>
                   </div>
                 </div>

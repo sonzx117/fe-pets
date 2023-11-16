@@ -8,11 +8,14 @@ export default function Information() {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+    console.log(userInfor)
+    const avatarAfter =
+        "https://cdn.pixabay.com/photo/2016/11/22/23/18/kingfisher-1851127_960_720.jpg";
     return (
         <div className="tab-pane">
             <div className="information">
                 <div className="avatar">
-                    <img loading="lazy" src={userInfor?.avatar} alt="" />
+                    <img loading="lazy" src={userInfor?.avatar === null ? avatarAfter : userInfor?.avatar  } alt="" />
                 </div>
                 <div className="title">
                     <div className="name">

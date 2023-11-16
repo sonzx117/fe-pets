@@ -6,7 +6,7 @@ import loginApi from "../../api/loginApi";
 import { userData } from "../../app/Slice/UserSlice";
 import { messageShowErr, messageShowSuccess } from "../../function";
 import imgDog from "../../images/login.png";
-import "../../sass/Login/Login.scss";
+import "../../sass/Login/Login.scss"; 
 import {
   eyeHidenLogin,
   eyeShowLogin,
@@ -126,8 +126,9 @@ export default function Login() {
             </div>
           </div>
           <div className="register">
+            <span> Nếu bạn chưa có tài khoản ? </span>
             <Link to="/Register">Đăng ký</Link>
-            <span> nếu bạn chưa có tài khoản</span>
+            
           </div>
         </form>
       </div>

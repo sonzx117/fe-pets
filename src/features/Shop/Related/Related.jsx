@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import petApi from "../../../api/petApi";
 import productApi from "../../../api/productApi";
 import "../../../sass/Shop/Related.scss";
+import { currencyFormatter } from "../../Utils/fotmat";
 export default function Related({ id, onLoad, load }) {
     const [data, setData] = useState([]);
     const { pathname } = useLocation();
@@ -32,18 +33,18 @@ export default function Related({ id, onLoad, load }) {
     }, [load]);
 
     const cutData = (e) => {
-        let arr = [];
-        for (let i = 0; i < e.rows.length; i++) {
-            const element = e.rows[i];
-            if (element.id !== +id) {
-                arr.push(element);
-            }
-            if (i === 3) {
-                return arr;
-            }
+    let arr = [];
+    for (let i = 0; i < e.rows.length; i++) {
+        const element = e.rows[i];
+        if (element.id !== +id) {
+            arr.push(element);
         }
-        return arr;
-    };
+        if (arr.length === 4) { // Lấy tối đa 4 sản phẩm
+            return arr;
+        }
+    }
+    return arr;
+};
 
     return (
         <div className="Related">
@@ -57,6 +58,7 @@ export default function Related({ id, onLoad, load }) {
                 {data?.map((ok, index) => (
                     <Grid item lg={3} md={4} sm={6} key={index}>
                         <div className="item-pet">
+                            
                             <div className="img">
                                 <img loading="lazy" src={ok.avatar} alt="" />
                                 <div className="add-cart">Thêm vào giỏ</div>
@@ -73,13 +75,10 @@ export default function Related({ id, onLoad, load }) {
                                 </Link>
                             </div>
                             <div className="price">
-                                {/* <div className="price1">
-                  <del>400.000</del>
-                </div> */}
                                 <div className="price2">
-                                    {parseInt(ok?.price).toLocaleString()}
+                                    {currencyFormatter.format(ok?.price)}
                                 </div>
-                                <div className="gia">VNĐ</div>
+                              
                             </div>
                         </div>
                     </Grid>

@@ -6,7 +6,7 @@ import userRoleApi from "../../api/userRoleApi";
 import { getName, messageShowErr, messageShowSuccess } from "../../function";
 import imgDog from "../../images/login.png";
 import "../../sass/Login/Login.scss";
-import {
+import { 
   eyeHidenLogin,
   eyeShowLogin,
   lockLogin,
@@ -173,8 +173,9 @@ export default function Register() {
               </div>
             </div> */}
             <div className="login-2">
+            <span> Nếu bạn đã có tài khoản ? </span>
               <Link to="/Login">Đăng nhập</Link>
-              <span> nếu bạn đã có tài khoản</span>
+             
             </div>
           </form>
         </div>

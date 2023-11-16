@@ -30,6 +30,15 @@ const Cart = createSlice({
 
       state.listCart.push(data);
     },
+    updateQuantity: (state, action) => {
+      const { id, quantity } = action.payload;
+      const productIndex = state.listCart.findIndex((item) => item.id === id);
+
+      if (productIndex !== -1) {
+        // Tìm thấy sản phẩm trong giỏ hàng
+        state.listCart[productIndex].quantityCurrent = quantity;
+      }
+    },
 
     removeListCart: (state, action) => {
       let index = state.listCart.findIndex((x) => x.id === action.payload);
@@ -53,7 +62,7 @@ const Cart = createSlice({
   },
 });
 const { reducer, actions } = Cart;
-export const { addListCart, removeListCart, resetCart, updateListCart } =
+export const { addListCart, removeListCart, resetCart, updateListCart,updateQuantity } =
   actions;
 
 export default reducer;

@@ -169,8 +169,11 @@
     }
     .register {
       position: absolute;
-      bottom: 10px;
-      width: Calc(100% - 4rem);
+      bottom: 3rem;
+      width: Calc(100% - 3rem);
+      // display: flex;
+      // gap: 0.4rem;
+      // flex-direction:column;
       // height: 141px;
       // display: flex;
       // align-items: flex-end;
@@ -178,21 +181,30 @@
       text-align: center;
       span,
       a {
+        color: #A9A9A9;
         font-size: 0.9rem;
+       
       }
       a {
         margin-right: 0.4rem;
         font-weight: 600;
         color: blue;
+        
+        
       }
+      
     }
     .login-2 {
+      // display: flex;
+      // flex-direction:column;
+      // gap: 0.4rem;
       position: absolute;
-      bottom: 10px;
-      width: Calc(100% - 4rem);
+      bottom: 3rem;
+      width: Calc(100% - 3rem);
       text-align: center;
       span,
       a {
+        color: #A9A9A9;
         font-size: 0.9rem;
       }
       a {

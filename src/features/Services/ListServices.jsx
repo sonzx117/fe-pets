@@ -1,11 +1,16 @@
+import { Container, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import renderHTML from "react-render-html";
 import { Link } from "react-router-dom";
-import serviceApi from "../../../api/ServiceApi";
-import imgDog from "../../../images/cat3.jpg";
-import "../../../sass/Home/Services.scss";
-export default function Services() {
-  const style = {
+
+import "../../sass/ListNews/ListNews.scss";
+import Banner from "../Banner/Banner";
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import serviceApi from "../../api/ServiceApi";
+import imgDog from '../../images/cat3.jpg'
+import renderHTML from "react-render-html";
+export default function ListServices() {
+    const listBread = [{ name: "Trang chủ", link: "/" }, { name: "Dịch vụ" }];
+    const style = {
     background: `url(${imgDog}) center no-repeat`,
     backgroundSize: "cover",
   };
@@ -17,9 +22,19 @@ export default function Services() {
       setData(ok.data);
     });
   }, []);
-
-  return (
-    <div className="Services" style={style}>
+    
+    return (
+        <div className="ListNews">
+            <Banner />
+            <Breadcrumbs breadCrumbList={listBread} />
+            <Container>
+                <div className="heading-detail">
+                    <div className="heading-detail__title">
+                        <h3>Dịch vụ</h3>
+                    </div>
+                    <div className="heading-detail__hr"></div>
+                </div>
+                <div className="Services" style={style}>
       <div className="blur"></div>
       <div className="heading">
         <div className="heading__title text-white">
@@ -42,5 +57,8 @@ export default function Services() {
         </div>
       </div>
     </div>
-  );
+                
+            </Container>
+        </div>
+    );
 }

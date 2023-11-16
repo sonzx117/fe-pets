@@ -18,9 +18,7 @@
     padding: 0 0.4rem;
     border-radius: 50px;
     line-height: 20px;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
+  
   }
   .icon {
     width: 20px;
@@ -53,38 +51,115 @@
     padding: 3rem 1rem 1rem 1rem;
     .content-header {
       display: flex;
-      align-items: center;
       height: 50px;
       box-shadow: $boxShadow;
       border-radius: 5px;
       font-size: 1.1rem;
       font-weight: 500;
+
+
+      
       .sp {
-        justify-content: center;
+       padding-left: 1rem;
+      }
+      .dg,
+      .sl,
+      .st,
+      .tt{
+        color: gray;
       }
     }
     .content-product {
-      display: flex;
-      margin: 1rem 0;
-      box-shadow: $boxShadow;
-      padding: 1rem 0;
-      .avatar {
-        width: 50px;
-        height: 50px;
-        margin-left: 1rem;
-        img {
-          border-radius: 2px;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      padding: 15px 0;
+      border-bottom: 1px solid #ddd;
+      margin-left: 0.5rem;
+    
+      .sp {
+        display: flex;
+        align-items: center;
+    
+        .avatar {
+              width: 50px;
+              height: 50px;
+              margin-left: 1rem;
+              img {
+                border-radius: 2px;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+    
+        .text {
+          font-size: 1.2rem;
+          margin-left: 2rem;
         }
       }
-      .text {
-        margin-left: 1rem;
-      }
+    
+      .dg,
+      .sl,
+      .st,
       .tt {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    
+      .dg {
+        font-weight: 400;
+      }
+    
+      .sl {
+        button {
+          background-color: #ccc;
+          border: none;
+          padding: 4px 10px;
+          font-size: 1rem;
+          cursor: pointer;
+          font-weight: 400;
+          border-radius: 5px;
+          border: 0.5px solid #ccc;
+    
+          &:disabled {
+            background-color: #eee;
+            cursor: not-allowed;
+          }
+        }
+      }
+      .input-cart{
+        width: 35px;
+        padding: 4px 5px;
+        text-align: center;
+        outline: none;
+        display: block;
+        margin: 0;
+        border: 0.5px solid #ccc;
+      }
+      .minus{
+      
+        border-right: 0 !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        
+        
+      }
+      .plus {
+        border-left: 0 !important;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+       
+      }
+      .st {
+        font-weight: 400;
         color: red;
-        text-decoration: underline;
+      }
+    
+      .tt {
+        font-weight: 400;
+        color: red;
+        cursor: pointer;
       }
     }
     .sp {
