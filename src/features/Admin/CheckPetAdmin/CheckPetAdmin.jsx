@@ -9,7 +9,7 @@ import {
   messageShowSuccess,
 } from "../../../function";
 import Spinner from "../Spin/Spinner";
-import { check, notCheck, statusOff, statusOn } from "../svg/IconSvg";
+import { check, notCheck } from "../svg/IconSvg";
 import Table from "../Table/Table";
 export default function CheckPetAdmin() {
   const { url } = useRouteMatch();

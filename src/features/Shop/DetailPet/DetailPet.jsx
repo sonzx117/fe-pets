@@ -12,7 +12,6 @@ import Related from "../Related/Related";
 import "./DetailPetJs";
 import { ClickImg } from "./DetailPetJs";
 import { cartplus, staricon } from "../../Admin/svg/IconSvg";
-import Cart from "../../Home/Cart/Cart";
 import {
   addListCart,
   updateListCart,
@@ -21,6 +20,10 @@ import {
 import { messageShowErr, messageShowSuccess } from "../../../function";
 import LabTabs from "../Tabs/Tabs";
 import { currencyFormatter } from "../../Utils/fotmat";
+import LikeButton from './LikeButton';
+// import { initFacebookSDK } from '../../../utils';
+import CommentFacebook from './CommentFacebook';
+
 
 export default function DetailPet() {
   const [data, setData] = useState(null);
@@ -28,8 +31,6 @@ export default function DetailPet() {
   const [quantityNumber, setQuantityNumber] = useState(1);
   const listCart = useSelector((state) => state.cart.listCart);
   const [activeImage, setActiveImage] = useState(data?.avatar);
-
-
 
   function add() {
     setQuantityNumber((quantityNumber) => quantityNumber + 1);
@@ -113,7 +114,7 @@ export default function DetailPet() {
   const handleImageHover = (imageSrc) => {
     setActiveImage(imageSrc);
   };
-  console.log(data)
+
 
 
   return (
@@ -190,6 +191,9 @@ export default function DetailPet() {
                   ))
                     :<span className="tags">{data?.type}</span>}
                 </div>
+                <div>
+                <LikeButton dataHref={process.env.REACT_APP_IS_LOCAL ? 'https://developers.facebook.com/docs/plugins/' : window.location.href}></LikeButton>
+              </div>
               
                 <div className="title">Số lượng: {data?.quantity ? data?.quantity : <p className="sold-out">Cháy hàng</p>}</div>
                 <div className="soluong">
@@ -234,7 +238,11 @@ export default function DetailPet() {
             marginTop: "3rem",
           }}
         >
-          <LabTabs description={data?.description}/>
+          <LabTabs description={data?.description} />
+          <CommentFacebook
+            dataHref={process.env.REACT_APP_IS_LOCAL ? 'https://developers.facebook.com/docs/plugins/comments#configurator' : window.location.href}
+            width="1270"
+          ></CommentFacebook>
         </Grid>
         <Grid
           container

@@ -10,7 +10,7 @@ export default function PetDetail() {
         petApi.getOne(id).then((ok) => {
             setData(ok);
         });
-    }, []);
+    }, [id]);
     return (
         <div className="PetDetail">
             <div className="heading">

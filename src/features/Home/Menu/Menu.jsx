@@ -120,10 +120,10 @@ export default function Menu({ user, setUserMenu }) {
                     </div>
                 </div>
                 <div className="menu-account">
-                    <div className="search">
+                    {/* <div className="search">
                         <input type="text" name="" placeholder="Tìm kiếm" id="" />
                         <div className="icon">{search}</div>
-                    </div>
+                    </div> */}
                     <div className="avatar" onClick={ClickAvatar}>
                         <img loading="lazy" src={user.length === 0 ? avatarDefault : user.avatar === null ? avatarAfter : user.avatar} alt="" />
                     </div>

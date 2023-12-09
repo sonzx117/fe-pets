@@ -10,10 +10,13 @@ import {
     petCheckPending,
     petCheckSuccess,
 } from "../../Admin/svg/IconSvg";
+import PetInfoDialog from './PetInfoDialog';
 export default function MyPet() {
     const { id } = useParams();
     const [data, setData] = useState(null);
     const [load, setLoad] = useState(false);
+    const [petInfo, setPetInfo] = useState(null); // To store the selected pet's information
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // To control the dialog visibility
     useEffect(() => {
         petApi.getPetUser(id).then((ok) => {
             setData(ok.rows);
@@ -74,6 +77,27 @@ export default function MyPet() {
             setLoad(!load);
         }, 500);
     };
+      // Function to open the dialog and set the selected pet's information
+  const openPetInfoDialog = (pet) => {
+    setPetInfo(pet);
+    setIsDialogOpen(true);
+    };
+    const handleDeletePet = (id) => {
+        if (window.confirm('Are you sure you want to delete this pet?')) {
+          petApi
+            .deletepet(id)
+            .then(() => {
+              // Handle success (you may want to update your UI or re-fetch data)
+              //   messageShowSuccess('Pet deleted successfully!');
+            })
+            .catch((error) => {
+              // Handle the error (show an error message)
+              console.error('Error deleting pet:', error);
+              messageShowErr('Error deleting pet. Please try again.');
+            });
+        }
+      };
+
     return (
         <div className="tab-pane">
             <Grid container spacing={4}>
@@ -126,6 +150,7 @@ export default function MyPet() {
                     </Grid>
                 ))}
             </Grid>
+            {isDialogOpen && <PetInfoDialog petInfo={petInfo} onClose={() => setIsDialogOpen(false)} />}
         </div>
     );
 }

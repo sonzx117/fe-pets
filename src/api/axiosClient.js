@@ -1,6 +1,6 @@
 import axios from "axios";
 import queryString from "query-string";
-
+export const url = 'http://localhost:666/api';
 const axiosClient = axios.create({
   baseURL: `http://localhost:666`,
   headers: {

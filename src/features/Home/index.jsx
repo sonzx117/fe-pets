@@ -6,7 +6,7 @@ import Gallery from "./Gallery/Gallery.jsx";
 import News from "./News/News.jsx";
 import Services from "./Services/Services.jsx";
 import Slide from "./Slide/Slide.jsx";
-
+import Chat from '../Chatbot/Chat.js';
 export default function Home() {
   const pr = useParams();
   console.log("pr", pr);
@@ -18,6 +18,7 @@ export default function Home() {
       <Comment />
       <Gallery />
       <News />
+      <Chat />
     </>
   );
 }

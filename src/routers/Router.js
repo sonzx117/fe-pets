@@ -16,6 +16,8 @@ import RegisterService from "../features/RegisterService/RegisterService";
 import DetailPet from "../features/Shop/DetailPet/DetailPet";
 import ShopPet from "../features/Shop/ShopPet/ShopPet";
 import ListServices from "../features/Services/ListServices.jsx";
+import PaymentSuccess from '../features/Shop/Payment/payment.jsx';
+
 
 const Routers = (props) => {
   const { location } = props;
@@ -63,6 +65,7 @@ const Routers = (props) => {
         <Route exact path="/Services" component={ListServices} />
         <Route exact path="/Shop" component={ShopPet} />
         <Route path="/ListNews/:id" component={DetailNew} />
+        <Route path="/Shop/payment-success" component={PaymentSuccess} />
         <Route path="/Shop/:type/:id" component={DetailPet} />
         <Route path="/Login" component={Login} />
         <Route path="/Register" component={Register} />

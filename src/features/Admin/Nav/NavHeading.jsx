@@ -8,7 +8,6 @@ import {
     profile,
     setting,
 } from "../svg/IconSvg";
-import img1 from "../../../images/pet8.jpg";
 import { useRef } from "react";
 import { useEffect } from "react";
 import { clickAvatar, clickBar } from "./NavJs";

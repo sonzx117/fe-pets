@@ -13,21 +13,29 @@ export default function NavMenu() {
 
   useEffect(() => {
     const listLi = ulEL.current.querySelectorAll('li a');
-    const listActive = ulEL.current.querySelector('li>a.active');
+    // const listActive = ulEL.current.querySelector('li>a.active');
     // let pathCutAdmin = pathname.slice(7);
     let idClass = pathname.slice(7).split('/');
     // let indexPath = pathCutAdmin.indexOf("/");
     // let idClass = pathCutAdmin.slice(0, indexPath);
-    listActive.classList.remove('active');
-    let liIndex = 0;
-    for (let i = 0; i < listLi.length; i++) {
-      const element = listLi[i];
+    // listActive.classList.remove('active');
+
+    listLi.forEach((element, i) => {
       if (element.id === idClass[0]) {
-        liIndex = i;
         element.classList.add('active');
+        clickActive(ulEL.current, lineEL.current, i);
       }
-    }
-    clickActive(ulEL.current, lineEL.current, liIndex);
+    });
+
+  //   let liIndex = 0;
+  //   for (let i = 0; i < listLi.length; i++) {
+  //     const element = listLi[i];
+  //     if (element.id === idClass[0]) {
+  //       liIndex = i;
+  //       element.classList.add('active');
+  //     }
+  //   }
+  //   clickActive(ulEL.current, lineEL.current, liIndex);
   }, []);
   const { path } = useRouteMatch();
   const { pathname } = useLocation();
@@ -51,12 +59,12 @@ export default function NavMenu() {
         <div className="title">Tổng quan</div>
         <ul ref={ulEL}>
           <div className="line" ref={lineEL}></div>
-          <li>
+          {/* <li>
             <Link to={`${path}`} className="active" id="">
               <div className="icon">{app}</div>
               <div className="text">Thống kê</div>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to={`${path}/CheckPet`} id="CheckPet">
               <div className="icon">{useCheck}</div>

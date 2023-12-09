@@ -4,7 +4,6 @@ import Bill from "../bill/bill";
 import BillDetail from "../bill/billDetail";
 import AddCategory from "../Category/AddCategory";
 import Category from "../Category/Category";
-import category from "../Category/Category";
 import CheckPetAdmin from "../CheckPetAdmin/CheckPetAdmin";
 import PetDetail from "../CheckPetAdmin/PetDetail";
 import AddContact from "../Contact/AddContact";

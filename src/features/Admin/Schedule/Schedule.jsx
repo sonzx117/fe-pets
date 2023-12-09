@@ -6,6 +6,7 @@ import scheduleApi from "../../../api/ScheduleApi";
 import { countPagination, formatDate } from "../../../function";
 import Spinner from "../Spin/Spinner";
 import Table from "../Table/Table";
+import { CSVLink } from 'react-csv';
 export default function Schedule() {
   const { url } = useRouteMatch();
   const titleTable = [
@@ -34,6 +35,12 @@ export default function Schedule() {
   const handleClickDetail = (e) => {
     history.push(`${url}/ScheduleDetail/${e}`);
   };
+  const csvHeaders = [
+    { label: 'Người mua', key: 'name' },
+    { label: 'Điện thoại', key: 'phone' },
+    { label: 'Địa chỉ', key: 'address' },
+    { label: 'Thời gian', key: 'time' },
+  ];
   return (
     <div className="AdminTable">
       <div className="heading">
@@ -43,8 +50,24 @@ export default function Schedule() {
         <div className="heading__hr"></div>
       </div>
 
-      {data !== null ? (
+      {data !== null ? ( 
         <div>
+
+        <CSVLink
+            style={{ position: 'absolute', top: '225px', right: '48px' }}
+            data={data.rows.map((ok) => ({
+              name: ok.name,
+              phone: ok.phone,
+              address: ok.address,
+              time: formatDate(ok.date),
+            }))}
+            headers={csvHeaders}
+            filename={'ChiTietDatLich_DichVuPet.csv'}
+            className="export-button"
+          >
+            Export to CSV
+          </CSVLink>
+
           <Table
             titleTable={titleTable}
             hidentDot

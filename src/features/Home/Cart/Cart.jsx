@@ -6,6 +6,7 @@ import { messageShowErr, messageShowSuccess } from "../../../function";
 import "../../../sass/Home/Cart.scss";
 import { cart } from "../../Admin/svg/IconSvg";
 import Payment from "../Payment/Payment";
+import PayButton from '../Payment/PayButton';
 import { currencyFormatter } from "../../Utils/fotmat";
 
 export default function Cart() {
@@ -116,8 +117,9 @@ export default function Cart() {
                     {listCart?.length > 0 && (
                         <div className="btn">
                             <button type="submit" onClick={handlePayment}>
-                                Thanh toán
+                                Đặt hàng
                             </button>
+                            <PayButton listCart={listCart}>Thanh toán</PayButton>
                         </div>
                     )}
                 </div>
